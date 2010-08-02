@@ -39,9 +39,6 @@
     },
     "engines": {
         "node": ">=0.1.93"
-    },
-    "scripts": {
-        "install": "node-waf configure build"
     }
 }
 
