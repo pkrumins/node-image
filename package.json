@@ -39,6 +39,11 @@
     },
     "engines": {
         "node": ">=0.1.93"
+    },
+    "dependencies": {
+        "png": "*",
+        "jpeg": "*",
+        "gif": "*"
     }
 }
 
