@@ -9,19 +9,22 @@ Overview
 --------
 
 Node-image module abstracts over node-png, node-gif and node-jpeg modules.
-It exports `Image`, `SyncImage, `Stack`, and `SyncStack` objects.
+It exports `Image`, and `Stack` objects.
 
-Use the `SyncImage` object to encode individual images of a specific width
-and height synchronously (blocking). For example:
+Use the `Image` object to encode individual images of a specific width and
+height synchronously (blocking) and asynchronously.
 
-    var SyncImage = require('image').SyncImage;
+Here is an example that encodes the images synchronously:
 
-    var png = new SyncImage('png').encode(buffer, width, height);
-    var gif = new SyncImage('gif').encode(buffer, widht, height);
-    var jpeg = new SyncImage('jpeg').encode(buffer, width, height);
+    var Image = require('image');
+
+    var png = new Image('png').encodeSync(buffer, width, height);
+    var gif = new Image('gif').encodeSync(buffer, widht, height);
+    var jpeg = new Image('jpeg').encodeSync(buffer, width, height);
 
 
-Use `Image` to do the same asynchronously:
+Use `.encode` function to do the same asynchronously. Pass it a callback with
+two arguments:
 
     var Image = require('image');
     
@@ -33,32 +36,43 @@ Use `Image` to do the same asynchronously:
 
 
 The buffers must be of node's `Buffer` type and they must hold either RGB, BGR,
-RGBA or BGRA values. `Image` and `SyncImage` objects default to RGB. To use a
-differnet buffer type, pass it as the 2nd argument to `Image's` constructor:
+RGBA or BGRA values. `Image` object defaults to RGB. To use a differnet buffer
+type, pass it as the 2nd argument to `Image's` constructor:
 
-    var png = new SyncImage('png', 'bgra').encode(buffer, 800, 600);
+    var png = new Image('png', 'bgra').encodeSync(buffer, 800, 600);
 
 
-The `SyncStack` object is used to create dynamic stacks of images synchronously.
+The `Stack` object is used to create dynamic stacks of images in sync and async
+manner.
+
 What I mean by that is that you can push an image to position (x, y) = (20, 40)
 and then push another image to position (x, y) = (1000, 2000), and the image
 will grow dynamically. Here is hot to use it:
-
-    var SyncStack = require('image').SyncStack;
-
-    var pngStack = new SyncStack('png');
-    pngStack.push(buffer, x, y, width, height);
-    var png = pngStack.encode();
-
-`Stack` is the same but asynchronous:
 
     var Stack = require('image').Stack;
 
     var pngStack = new Stack('png');
     pngStack.push(buffer, x, y, width, height);
-    pngStack.encode(function (data, error) {
-        // 'data' contains the png image
+    var png = pngStack.encodeSync();
+    console.dir(png.dimensions()); // prints dynamic png's dimensions
+
+And the same asynchronously:
+
+    var Stack = require('image').Stack;
+
+    var pngStack = new Stack('png');
+    pngStack.push(buffer, x, y, width, height);
+    pngStack.encode(function (data, dims, error) {
+        // 'data' contains the png image and 'dims' contains its dynamic dimensions
     });
+
+
+See tests/ directory for some examples, it comes with a BGR buffer for testing.
+First unpack it:
+
+    tar -xjf desktop.tar.bz2
+
+Then run any of sync.js, async.js, sync-stack.js, async-stack.js examples.
 
 
 Dependencies
