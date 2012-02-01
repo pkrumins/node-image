@@ -1,7 +1,7 @@
 {
     "name": "image",
-    "version": "1.0.0",
-    "main": "png",
+    "version": "1.0.1",
+    "main": "lib/image.js",
     "description": "This is a node.js module that unifies node-png, node-gif and node-jpeg modules.",
     "keywords": [
         "png",
@@ -14,26 +14,17 @@
         "picture",
         "image"
     ],
-    "maintainers": [
-        {
-            "name": "Peteris Krumins",
-            "email": "peteris.krumins@gmail.com",
-            "web": "http://www.catonmat.net",
-            "twitter": "pkrumins"
-        } 
-    ],
-    "licenses": [
-        {
-           "type": "MIT"
-        } 
-    ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "http://github.com/pkrumins/node-image.git" 
-        } 
-    ],
-    "main": "lib/image.js",
+    "author": {
+        "name": "Peteris Krumins",
+        "email": "peteris.krumins@gmail.com",
+        "web": "http://www.catonmat.net",
+        "twitter": "pkrumins"
+    } 
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/pkrumins/node-image.git" 
+    }, 
     "directories": {
         "lib": "lib"
     },
